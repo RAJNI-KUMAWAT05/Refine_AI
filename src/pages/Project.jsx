@@ -16,7 +16,7 @@ function Project() {
   const [data, setData] = useState();
 
   useEffect(() => {
-    const url = `http://localhost:3000/api/get_project/${id}`;
+   const url = `${import.meta.env.VITE_API_URL}/api/get_project/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((dat) => {
