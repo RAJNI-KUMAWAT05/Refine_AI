@@ -1,6 +1,6 @@
 // About.jsx
 import React from "react";
-import demoVideo from "../assets/demo-video.mp4"
+// import demoVideo from "../assets/demo-video.mp4"
 import shot1 from '../assets/shot1.png'
 import shot2 from '../assets/shot2.png'
 
@@ -35,7 +35,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Working Video */}
+      /* {/* Working Video */}
       <section className="py-16 bg-gradient-to-r from-blue-900 via-purple-900 to-indigo-900">
         <h2 className="text-4xl font-bold text-center mb-8">🎥 Watch How It Works</h2>
         <div className="flex justify-center">
@@ -47,7 +47,8 @@ const About = () => {
             Your browser does not support the video tag.
           </video>
         </div>
-      </section>
+      </section> */
+      <p>Demo video coming soon...</p>
 
       {/* Screenshots / Images */}
       <section className="py-16 max-w-6xl mx-auto px-6">
