@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import userImage from '../assets/user.png'; // Replace with user image
 import { formatReadableDate } from '../utils/formatTime';
+const API_URL = import.meta.env.VITE_API_URL;
 
 // const projects = [
 //     { id: 1, name: "AI Multi-Agent Requirement Refinement", date: "2025-08-23", status: "Completed" },
@@ -17,13 +18,17 @@ function Dashboard() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/current_user", { credentials: "include" })
+      fetch(`${API_URL}/api/current_user`, {
+    credentials: "include"
+})
             .then(res => res.json())
             .then(data => { setUser(data.user) });
     }, []);
 
     useEffect(() => {
-        fetch("http://localhost:3000/api/user_projects", { credentials: "include" })
+       fetch(`${API_URL}/api/user_projects`, {
+    credentials: "include"
+})
             .then(res => res.json())
             .then(data => { setProjects(data) });
     }, []);
@@ -44,7 +49,7 @@ function Dashboard() {
     }
 
     const handleLogout = async () => {
-        window.location.href = "http://localhost:3000/logout"
+       window.location.href = `${API_URL}/logout`
     }
     return (
         <div className="min-h-screen bg-gray-50 flex">
