@@ -40,7 +40,10 @@ app.use(express.urlencoded({ extended: true }));
 // cors setup
 app.use(
     cors({
-        origin: "http://localhost:5173",   // frontend URL
+        origin: [
+  "http://localhost:5173",
+  "https://refine-ai-1aac.vercel.app"
+], // frontend URL
         credentials: true,                 // allow cookies/session
         methods: ["GET", "POST", "PUT", "DELETE"],
     })
@@ -85,7 +88,7 @@ passport.use(
         {
             clientID: process.env.GOOGLE_CLIENT_ID,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-            callbackURL: "http://localhost:3000/auth/google/callback",
+            callbackURL:process.env.GOOGLE_CALLBACK_URL,
         },
         async (accessToken, refreshToken, profile, done) => {
             // saves user to data base
@@ -138,7 +141,7 @@ app.get("/auth/google", async (req, res, next) => {
                 }
                 console.log("✅ req.login successful. req.user is now:", req.user);
                 console.log("📦 req.session after login:", req.session);
-                return res.redirect("http://localhost:5173/dashboard");
+                return res.redirect(`${process.env.CLIENT_URL}/dashboard`);
             });
         } catch (err) {
             console.error("❌ Error in dummy auth route:", err);
@@ -154,7 +157,7 @@ app.get("/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/login" }),
     (req, res) => {
         // Redirect frontend with user session
-        res.redirect("http://localhost:5173/dashboard");
+       res.redirect(`${process.env.CLIENT_URL}/dashboard`);
     }
 );
 
@@ -172,7 +175,7 @@ app.get("/api/current_user", (req, res) => {
 
 app.get("/logout", (req, res) => {
     req.logout(() => {
-        res.redirect("http://localhost:5173/");
+       res.redirect(process.env.CLIENT_URL);
     });
 });
 
